@@ -10,6 +10,7 @@ import UIKit
 
 class FSPagerViewLayout: UICollectionViewLayout {
     
+    internal var alignment: FSPagerView.ContentAlignment = .center
     internal var contentSize: CGSize = .zero
     internal var leadingSpacing: CGFloat = 0
     internal var itemSpacing: CGFloat = 0
@@ -75,7 +76,14 @@ class FSPagerViewLayout: UICollectionViewLayout {
             return pagerView.interitemSpacing
         }()
         self.scrollDirection = pagerView.scrollDirection
-        self.leadingSpacing = self.scrollDirection == .horizontal ? (collectionView.frame.width-self.actualItemSize.width)*0.5 : (collectionView.frame.height-self.actualItemSize.height)*0.5
+        
+        switch alignment {
+        case .leading:
+            self.leadingSpacing = self.scrollDirection == .horizontal ? 0 : (collectionView.frame.height-self.actualItemSize.height)*0.5
+        case .center:
+            self.leadingSpacing = self.scrollDirection == .horizontal ? (collectionView.frame.width-self.actualItemSize.width)*0.5 : (collectionView.frame.height-self.actualItemSize.height)*0.5
+        }
+
         self.itemSpacing = (self.scrollDirection == .horizontal ? self.actualItemSize.width : self.actualItemSize.height) + self.actualInteritemSpacing
         
         // Calculate and cache contentSize, rather than calculating each time

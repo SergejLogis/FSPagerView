@@ -77,6 +77,12 @@ public protocol FSPagerViewDelegate: NSObjectProtocol {
 @IBDesignable
 open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelegate {
     
+    @objc
+    public enum ContentAlignment: Int {
+        case leading
+        case center
+    }
+    
     // MARK: - Public properties
 
     /// The object that acts as the data source of the pager view.
@@ -166,6 +172,14 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
     open var removesInfiniteLoopForSingleItem: Bool = false {
         didSet {
             self.reloadData()
+        }
+    }
+    
+    @IBInspectable
+    open var alignment: ContentAlignment = .center {
+        didSet {
+            self.collectionViewLayout.alignment = alignment
+            self.collectionViewLayout.forceInvalidate()
         }
     }
     
