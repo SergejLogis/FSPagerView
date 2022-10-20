@@ -77,9 +77,8 @@ public protocol FSPagerViewDelegate: NSObjectProtocol {
 @IBDesignable
 open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelegate {
     
-    @objc
-    public enum ContentAlignment: Int {
-        case leading
+    public enum ContentAlignment {
+        case leading(spacing: CGFloat)
         case center
     }
     
@@ -175,7 +174,7 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
         }
     }
     
-    @IBInspectable
+    /// Content alignment of the pager view.
     open var alignment: ContentAlignment = .center {
         didSet {
             self.collectionViewLayout.alignment = alignment

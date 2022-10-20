@@ -78,8 +78,8 @@ class FSPagerViewLayout: UICollectionViewLayout {
         self.scrollDirection = pagerView.scrollDirection
         
         switch alignment {
-        case .leading:
-            self.leadingSpacing = self.scrollDirection == .horizontal ? 0 : (collectionView.frame.height-self.actualItemSize.height)*0.5
+        case .leading(let spacing):
+            self.leadingSpacing = self.scrollDirection == .horizontal ? spacing : (collectionView.frame.height-self.actualItemSize.height)*0.5
         case .center:
             self.leadingSpacing = self.scrollDirection == .horizontal ? (collectionView.frame.width-self.actualItemSize.width)*0.5 : (collectionView.frame.height-self.actualItemSize.height)*0.5
         }
